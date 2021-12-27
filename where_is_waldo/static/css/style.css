@@ -1,0 +1,32 @@
+#game_image {
+    width: 100%;
+}
+
+/* body{
+    cursor:url('../images/cursor.png'), auto; 
+} */
+
+.root-div{
+    position: relative;
+}
+
+
+.drop-down{
+    position: absolute;
+    /* overflow: visible;  */
+}
+
+li{
+    background-color: white;
+    padding: 10px 20px;
+    font-size: 24px;
+    border: 1px solid white; 
+}
+
+li:hover{
+    border : 1px solid grey; 
+}
+
+ul.navigation {
+    background-color: white; 
+}
