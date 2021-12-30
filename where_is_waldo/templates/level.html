@@ -19,46 +19,38 @@
     <div id="modal">
         <h2>Where is Waldo</h4>
         <p>Find the Below Characters to win</p>
+
+        {% for character in characters %}
         <div class="search-element">
-            <img src="{{ url_for('static',filename='images/Goku.png') }}" alt="">
+            <img src="{{ url_for('static',filename='images/'+character+'.png') }}" alt="">
             <div class="search-info">
                 <h3>Easy</h3>
-                <h2>Goku</h2>
+                <h2>{{ character }}</h2>
                 <p>Dragon ball Z</p>
             </div>
         </div>
-        <div class="search-element">
-            <img src="{{ url_for('static',filename='images/Leo.png') }}" alt="">
-            <div class="search-info">
-                <h3>Medium</h3>
-                <h2>Leonardo</h2>
-                <p>Teenage Mutant Ninja Turtles</p>
-            </div> 
-        </div> 
-        <div class="search-element">
-            <img src="{{ url_for('static',filename='images/Mike.png') }}" alt="">
-            <div class="search-info">
-                <h3>Hard</h3>
-                <h2>Mike</h2>
-                <p>Monster Inc.</p>
-            </div>
-        </div>
+        {% endfor %}
         <button class="start-button" onclick="startGame()"><p>Start</p></button>
     </div>
 
-    <nav id="nav">
-        <h1 id="nav-h1"></h1>
-        <div id="images"></div>
-    </nav>
+    <div class="nav-bar-wrapper">
+        <nav id="nav">
+            <h1 id="nav-h1"></h1>
+            <div id="images"></div>
+        </nav>
+    </div>
+   
     
     <div class="root-div">
-        <img id="game_image" src="{{ url_for('static',filename='images/level1.jpg') }}" alt="">
+        <img id="game_image" src="{{ url_for('static',filename='images/level'+lvl +'.jpg') }}" alt="">
     </div>
   
 
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+    <script type="text/javascript">
+        populate({{ characters|tojson }}); 
+    </script>
 </body>
 </html>
-
-<!-- <a target="_blank" href="https://icons8.com/icon/uwJWcwKI2gsy/cursor">Cursor</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
