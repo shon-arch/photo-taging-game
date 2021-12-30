@@ -9,8 +9,48 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Space+Mono&display=swap" rel="stylesheet"> 
+
 </head>
 <body>
+
+    <div id="modal">
+        <h2>Where is Waldo</h4>
+        <p>Find the Below Characters to win</p>
+        <div class="search-element">
+            <img src="{{ url_for('static',filename='images/Goku.png') }}" alt="">
+            <div class="search-info">
+                <h3>Easy</h3>
+                <h2>Goku</h2>
+                <p>Dragon ball Z</p>
+            </div>
+        </div>
+        <div class="search-element">
+            <img src="{{ url_for('static',filename='images/Leo.png') }}" alt="">
+            <div class="search-info">
+                <h3>Medium</h3>
+                <h2>Leonardo</h2>
+                <p>Teenage Mutant Ninja Turtles</p>
+            </div> 
+        </div> 
+        <div class="search-element">
+            <img src="{{ url_for('static',filename='images/Mike.png') }}" alt="">
+            <div class="search-info">
+                <h3>Hard</h3>
+                <h2>Mike</h2>
+                <p>Monster Inc.</p>
+            </div>
+        </div>
+        <button class="start-button" onclick="startGame()"><p>Start</p></button>
+    </div>
+
+    <nav id="nav">
+        <h1 id="nav-h1"></h1>
+        <div id="images"></div>
+    </nav>
+    
     <div class="root-div">
         <img id="game_image" src="{{ url_for('static',filename='images/level1.jpg') }}" alt="">
     </div>
