@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Space+Mono&display=swap" rel="stylesheet"> 
+
+</head>
+<body>
+    <nav class="home-nav">
+        <h1>Where is Waldo</h1>
+        <button>LeaderBoard</button>
+    </nav>
+    <div class="levels">
+        <a href="{{ url_for('level',lvl = 1) }}">
+        <div class="level-image">
+            <img src="{{ url_for('static', filename='images/level1.jpg') }}" alt="">
+            <h3>Level 1</h3>
+        </div>
+    </a>
+    <a href="{{ url_for('level',lvl = 2) }}">
+        <div class="level-image">
+            <img src="{{ url_for('static', filename='images/level2.jpg') }}" alt="">
+            <h3>Level 2</h3>
+        </div>
+    </a>
+    <a href="{{ url_for('level',lvl = 3) }}">
+        <div class="level-image">
+            <img src="{{ url_for('static', filename='images/level3.jpg') }}" alt="">
+            <h3>Level 3</h3>
+        </div>
+    </a>
+    </div>
+</body>
