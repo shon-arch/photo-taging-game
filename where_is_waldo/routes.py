@@ -1,53 +1,6 @@
+import json
 from where_is_waldo import app, db_object
-from flask import render_template, request, url_for
-
-lvl_characters = {
-    '1' : [
-            {
-                'name' : 'Goku', 
-                'source': 'Drangon Ball Z', 
-                'difficulty': 'Easy'
-            },
-            {   'name': 'Leo', 
-                'source': 'Ninja Turtles', 
-                'difficulty': 'Medium'
-            }, 
-            {   'name' : 'Mike', 
-                'source': 'Monster Inc.',
-                'difficulty': 'Hard'
-            }
-        ],
-     '2' : [
-            {
-                'name' : 'Sus', 
-                'source': 'Among Us', 
-                'difficulty': 'Easy'
-            },
-            {   'name': 'Yubaba', 
-                'source': 'Spirited Away', 
-                'difficulty': 'Medium'
-            }, 
-            {   'name' : 'Mario', 
-                'source': 'Super Mario',
-                'difficulty': 'Hard'
-            }
-        ],
-      '3' : [
-            {
-                'name' : 'Ryuk', 
-                'source': 'Death Note', 
-                'difficulty': 'Easy'
-            },
-            {   'name': 'Tom', 
-                'source': 'Tom and Jerry', 
-                'difficulty': 'Medium'
-            }, 
-            {   'name' : 'Patrick', 
-                'source': 'SpongeBob Square Pants',
-                'difficulty': 'Hard'
-            }
-        ],
-}
+from flask import render_template, request, url_for, redirect, jsonify
 
 @app.route("/")
 def home():
@@ -55,16 +8,27 @@ def home():
 
 @app.route("/level/<lvl>")
 def level(lvl):
-    return render_template("level.html",characters=lvl_characters[lvl], lvl=lvl)
+    level_data = db_object.db.levelCharacters.find_one({'level' : int(lvl)})
+    return render_template("level.html",characters=level_data['data'], lvl=lvl)
 
 @app.route('/leaderboard')
 def leaderboard():
     return render_template('leaderboard.html')
 
-@app.route('/post_user')
+@app.route('/post_user', methods=['POST'])
 def post_user():
-    return url_for('leaderboard')
+    body = request.get_json()
+    db_object.db.leaderboard.insert_one({'username': body['username'], 'time' : body['time'],'level': body['level']})
+    return {'Message': 'Success'}, 201
 
+@app.route("/leaderboard_level")
+def leaderboard_level():
+    level = request.args.get('level')
+    user_info = db_object.db.leaderboard.find({'level': str(level)})
+    user_info = list(user_info)
+    user_data = [[x['username'],x['time']] for x in user_info ]
+    return jsonify(user_data)
+    
 
 @app.route("/verify/<character>")
 def verify(character):
