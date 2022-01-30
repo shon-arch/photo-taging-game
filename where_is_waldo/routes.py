@@ -24,7 +24,7 @@ def post_user():
 @app.route("/leaderboard_level")
 def leaderboard_level():
     level = request.args.get('level')
-    user_info = db_object.db.leaderboard.find({'level': str(level)})
+    user_info = db_object.db.leaderboard.find({'level': int(level)})
     user_info = list(user_info)
     user_data = [[x['username'],x['time']] for x in user_info ]
     return jsonify(user_data)
