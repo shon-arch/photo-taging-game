@@ -11,7 +11,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Space+Mono&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Pushster&family=Space+Mono&display=swap" rel="stylesheet">  
 
 </head>
 <body>
@@ -19,38 +19,43 @@
     <div id="modal">
         <h2>Where is Waldo</h4>
         <p>Find the Below Characters to win</p>
-
         {% for character in characters %}
         <div class="search-element">
-            <img src="{{ url_for('static',filename='images/'+character+'.png') }}" alt="">
+            <img src="{{ url_for('static',filename='images/'+character['name']+'.png') }}" alt="">
             <div class="search-info">
-                <h3>Easy</h3>
-                <h2>{{ character }}</h2>
-                <p>Dragon ball Z</p>
+                <h3>{{ character['difficulty'] }}</h3>
+                <h2>{{ character['name'] }}</h2>
+                <p>{{ character['source'] }}</p>
             </div>
         </div>
         {% endfor %}
-        <button class="start-button" onclick="startGame()"><p>Start</p></button>
+        <button class="btn" onclick="startGame()"><p>Start</p></button>
     </div>
 
-    <div class="nav-bar-wrapper">
-        <nav id="nav">
-            <h1 id="nav-h1"></h1>
-            <div id="images"></div>
-        </nav>
+
+    <div id="user-modal">
+        <h1>Congratulations</h1>
+        <p>Enter your name</p>
+        <input id="user-name" type="text">
+        <button onclick="submitScore()">Submit</button>
     </div>
-   
+
+
+    <nav id="nav">
+        <div id="images"></div>
+        <div id="status"></div>
+    </nav>
+  
     
     <div class="root-div">
         <img id="game_image" src="{{ url_for('static',filename='images/level'+lvl +'.jpg') }}" alt="">
-    </div>
-  
+    </div>  
 
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
     <script type="text/javascript">
-        populate({{ characters|tojson }}); 
+        populate({{ characters|tojson }}, {{ lvl}});
     </script>
 </body>
 </html>
