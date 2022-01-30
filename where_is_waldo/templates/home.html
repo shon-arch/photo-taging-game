@@ -17,7 +17,7 @@
 <body>
     <nav class="home-nav">
         <h1>Where is Waldo</h1>
-        <button>LeaderBoard</button>
+        <button class="btn"><a href="{{ url_for('leaderboard') }}">LeaderBoard</a></button>
     </nav>
     <div class="levels">
         <a href="{{ url_for('level',lvl = 1) }}">
